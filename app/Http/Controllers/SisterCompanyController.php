@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\sisterCompanyEditRequest;
 use App\Http\Requests\sisterCompanyStoreRequest;
 use App\Models\SisterCompany;
 // use Illuminate\Console\View\Components\Alert;
@@ -98,15 +99,33 @@ class SisterCompanyController extends Controller
      */
     public function edit(SisterCompany $sisterCompany)
     {
-        return $sisterCompany;
+        return view('dashboard.backend.sisterCompany.edit', compact('sisterCompany'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SisterCompany $sisterCompany)
+    public function update(sisterCompanyEditRequest $request, SisterCompany $sisterCompany)
     {
-        //
+        
+        $sisterCompany->update([
+                'code' => $request->code, 
+                'name' => $request->name,
+                'picUser' => $request->picUser,
+                'tlp' => $request->tlp,
+                'email' => $request->email,
+                'address' => $request->address,
+                'description' => $request->description,
+            ]);
+
+
+        session()->flash('status', 'Data '.$request->name.' berhasil diupdate!');
+
+        return redirect()->route('sister-company.index');
+
+
+
+        
     }
 
     /**
@@ -114,6 +133,11 @@ class SisterCompanyController extends Controller
      */
     public function destroy(SisterCompany $sisterCompany)
     {
-        //
+        $sisterCompany->delete();
+
+        session()->flash('status', 'Data '.$sisterCompany->code .' + '.$sisterCompany->name .' berhasil diupdate!');
+
+        return redirect()->route('sister-company.index');
+
     }
 }
