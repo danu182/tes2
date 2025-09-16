@@ -30,7 +30,7 @@ class SisterCompanyController extends Controller
                             Edit
                         </a>
                         <form class="d-flex gap-2 inline-block" action="' . route('sister-company.destroy', $item->id) . '" method="POST">
-                        <button class="btn btn-danger" >
+                        <button class="btn btn-danger" id="btn-delete">
                             Hapus
                         </button>
                             ' . method_field('delete') . csrf_field() . '

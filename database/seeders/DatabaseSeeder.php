@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             sisterCompanyTableSeeder::class,
+            StatusApprovalTabelSeeder::class,
         ]);
     }
 }
