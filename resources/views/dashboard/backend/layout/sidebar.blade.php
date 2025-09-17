@@ -51,8 +51,33 @@
 								<p>Base</p>
 								<span class="caret"></span>
 							</a>
+							
+							
 							<div class="collapse show" id="base">
 								<ul class="nav nav-collapse">
+
+									{{-- start custom sidebar --}}
+									
+									<li class="active">
+										<a href="{{route('status-approval.index')}}">
+											<span class="sub-item">status-approval</span>
+										</a>
+									</li>
+									
+									<li class="active">
+										<a href="{{route('sister-company.index')}}">
+											<span class="sub-item">sister-company</span>
+										</a>
+									</li>
+									
+									<li class="active">
+										<a href="{{route('supplier.index')}}">
+											<span class="sub-item">supplier</span>
+										</a>
+									</li>
+
+									{{-- end custom sidebar --}}
+
 									<li class="active">
 										<a href="../components/avatars.html">
 											<span class="sub-item">Avatars</span>
@@ -100,6 +125,8 @@
 									</li>
 								</ul>
 							</div>
+
+							
 						</li>
 						<li class="nav-item">
 							<a data-bs-toggle="collapse" href="#sidebarLayouts">

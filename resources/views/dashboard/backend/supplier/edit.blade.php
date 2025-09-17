@@ -5,7 +5,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Sister Company</h3>
+            <h3 class="fw-bold mb-3">Supplier</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="#">
@@ -22,7 +22,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Add Sister Company</a>
+                    <a href="#">Edit Supplier</a>
                 </li>
             </ul>
         </div>
@@ -31,77 +31,61 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">ADD Sister company</h4>
+                        <h4 class="card-title">Edit Supplier</h4>
                     </div>
                         <div class="card-body">
                             {{-- form start --}}
-                            <form action="{{ route('sister-company.store') }}" method="POST">
+                            <form action="{{ route('supplier.update', $supplier->id) }}" method="POST">
                                 @csrf
-
-                                <div class="mb-3">
-                                    <div class="col-auto">
-                                        <label for="inputCode6" class="col-form-label">Code</label>
-                                    </div>
-                                    <div class="col-auto">
-                                        <input type="text" id="inputCode6" class="form-control @error('code') is-invalid @enderror" aria-describedby="CodeHelpInline" name="code" value="{{ old('code') }}">
-                                    </div>
-                                    <div class="col-auto">
-                                        <span id="CodeHelpInline" class="form-text">
-                                        harus unik.
-                                        </span>
-                                         @error('code')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
+                                @method('PUT')
 
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputname6" class="col-form-label">name</label>
+                                        <label for="inputnameSupplier6" class="col-form-label">name Supplier</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="inputname6" class="form-control @error('name') is-invalid @enderror" aria-describedby="nameHelpInline" name="name" value="{{ old('name') }}">
+                                        <input type="text" id="inputnameSupplier6" class="form-control @error('nameSupplier') is-invalid @enderror" aria-describedby="nameSupplierHelpInline" name="nameSupplier" value="{{ $supplier->nameSupplier ?: old('nameSupplier') }}">
                                     </div>
                                     <div class="col-auto">
-                                        <span id="nameHelpInline" class="form-text">
-                                        masukkan nama perusahaan.
+                                        <span id="nameSupplierHelpInline" class="form-text">
+                                        masukkan name Supplier.
                                         </span>
                                     </div>
-                                    @error('name')
+                                    @error('nameSupplier')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
 
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputpicUser6" class="col-form-label">picUser</label>
+                                        <label for="inputcontact_person6" class="col-form-label">contact_person</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="inputpicUser6" class="form-control @error('picUser') is-invalid @enderror" aria-describedby="picUserHelpInline" name="picUser" value="{{ old('picUser') }}">
+                                        <input type="text" id="inputcontact_person6" class="form-control @error('contact_person') is-invalid @enderror" aria-describedby="contact_personHelpInline" name="contact_person" value="{{ $supplier->contact_person ?: old('contact_person') }}">
                                     </div>
                                     <div class="col-auto">
-                                        <span id="picUserHelpInline" class="form-text">
-                                        masukkan nama PIC perusahaan.
+                                        <span id="contact_personHelpInline" class="form-text">
+                                        masukkan name Supplier.
                                         </span>
                                     </div>
-                                    @error('picUser')
+                                    @error('contact_person')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
 
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputtlp6" class="col-form-label">tlp</label>
+                                        <label for="inputphone6" class="col-form-label">Phone</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="inputtlp6" class="form-control @error('tlp') is-invalid @enderror" aria-describedby="tlpHelpInline" name="tlp" value="{{ old('tlp') }}">
+                                        <input type="text" id="inputphone6" class="form-control @error('phone') is-invalid @enderror" aria-describedby="emailHelpInline" name="phone" value="{{ $supplier->phone ?:old('phone') }}">
                                     </div>
                                     <div class="col-auto">
-                                        <span id="tlpHelpInline" class="form-text">
-                                        masukkan No TLP perusahaan.
+                                        <span id="emailHelpInline" class="form-text">
+                                        masukkan phone.
                                         </span>
                                     </div>
-                                    @error('tlp')
+                                    @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
@@ -111,11 +95,11 @@
                                         <label for="inputemail6" class="col-form-label">email</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="email" id="inputemail6" class="form-control @error('email') is-invalid @enderror" aria-describedby="emailHelpInline" name="email" value="{{ old('email') }}">
+                                        <input type="text" id="inputemail6" class="form-control @error('email') is-invalid @enderror" aria-describedby="emailHelpInline" name="email" value="{{ $supplier->email ?: old('email') }}">
                                     </div>
                                     <div class="col-auto">
                                         <span id="emailHelpInline" class="form-text">
-                                        masukkan No email perusahaan.
+                                        masukkan email.
                                         </span>
                                     </div>
                                     @error('email')
@@ -123,35 +107,36 @@
                                         @enderror
                                 </div>
 
+                                 
+
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputaddress6" class="col-form-label">address</label>
+                                        <label for="address6" class="col-form-label">address</label>
                                     </div>
                                     <div class="col-auto">
-                                        {{-- <input type="text" id="inputaddress6" class="form-control @error('name') is-invalid @enderror" aria-describedby="addressHelpInline" name="address"> --}}
-                                        <textarea name="address" id="" cols="30" rows="10" id="inputaddress6" class="form-control @error('address') is-invalid @enderror" aria-describedby="addressHelpInline">{{ old('address') }}</textarea>
+                                        <textarea name="address" id="" cols="30" rows="10" id="address6" class="form-control @error('address') is-invalid @enderror" aria-describedby="addressHelpInline">{{ $supplier->address ?: old('address') }}</textarea>
                                     </div>
                                     <div class="col-auto">
                                         <span id="addressHelpInline" class="form-text">
-                                        masukkan No address perusahaan.
+                                        masukkan address.
                                         </span>
                                     </div>
                                     @error('address')
-                                            <span class="text-danger">{{ $message }}</span>
+                                            <span class="text-danger form-text">{{ $message }}</span>
                                         @enderror
                                 </div>
+                                 
 
                                  <div class="mb-3">
                                     <div class="col-auto">
                                         <label for="inputdescription6" class="col-form-label">description</label>
                                     </div>
                                     <div class="col-auto">
-                                        {{-- <input type="text" id="inputdescription6" class="form-control @error('name') is-invalid @enderror" aria-describedby="descriptionHelpInline" name="description"> --}}
-                                        <textarea name="description" id="" cols="30" rows="10" id="inputdescription6" class="form-control @error('description') is-invalid @enderror" aria-describedby="descriptionHelpInline">{{ old('description') }}</textarea>
+                                        <textarea name="description" id="" cols="30" rows="10" id="inputdescription6" class="form-control @error('description') is-invalid @enderror" aria-describedby="descriptionHelpInline">{{ $supplier->description ?: old('description') }}</textarea>
                                     </div>
                                     <div class="col-auto">
                                         <span id="descriptionHelpInline" class="form-text">
-                                        masukkan description perusahaan.
+                                        masukkan description approval.
                                         </span>
                                     </div>
                                     @error('description')
@@ -160,11 +145,9 @@
                                 </div>
 
                                     <button class="btn btn-success">Submit</button>
-                                    {{-- <button class="btn btn-danger">Cancel</button> --}}
-                                    <button type="button" class="btn btn-danger" onclick="window.location='{{ route('sister-company.index') }}'">Cancel</button>
-                                    
-                                </form>
-                                {{-- <a href="{{route('sister-company.index')}}" class="btn btn-danger">Cancel</a> --}}
+                                    <button class="btn btn-danger">Cancel</button>
+                                
+                            </form>
                             {{-- form end --}}
                     </div>
                 </div>

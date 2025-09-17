@@ -26,7 +26,7 @@ class StatusApprovalController extends Controller
                             Edit
                         </a>
                         <form class="d-flex gap-2 inline-block" action="' . route('status-approval.destroy', $item->id) . '" method="POST">
-                        <button class="btn btn-danger" id="btn-delete">
+                        <button class="btn btn-danger" id="delete-button">
                             Hapus
                         </button>
                             ' . method_field('delete') . csrf_field() . '
