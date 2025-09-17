@@ -95,7 +95,7 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Supplier $supplier)
+public function update(SupplierStoreRequest $request, Supplier $supplier)
     {
          $supplier->update([
                 'nameSupplier'=> $request->nameSupplier, 
@@ -119,8 +119,8 @@ class SupplierController extends Controller
     {
         $supplier->delete();
 
-        session()->flash('status', 'Data  '.$supplier->nameApproval .' berhasil dihapus!');
+        session()->flash('status', 'Data  '.$supplier->nameSupplier .' berhasil dihapus!');
 
-        return redirect()->route('supplier.destroy');
+        return redirect()->route('supplier.index');
     }
 }

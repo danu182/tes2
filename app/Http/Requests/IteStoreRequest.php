@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class sisterCompanyStoreRequest extends FormRequest
+class IteStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true ;
+        return true;
     }
 
     /**
@@ -22,13 +22,9 @@ class sisterCompanyStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "code"=> 'required|unique:items,code|max:100',
-            "name"=> 'required|max:100',
-            "picUser"=> 'nullable|max:100',
-            "tlp"=> 'nullable|max:100',
-            "email"=> 'nullable|max:100',
-            "address"=> 'required|max:100',
-            "description"=> 'nullable|max:100',
+            'itemName' => 'required|unique:items,itemName|max:100',
+            'uom' => 'nullable',
+            'description' => 'nullable|max:200',
         ];
     }
 }
