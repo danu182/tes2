@@ -144,7 +144,7 @@
                                 </div>
 
                                     <button class="btn btn-success">Submit</button>
-                                    <button class="btn btn-danger">Cancel</button>
+                                    <button type="button" class="btn btn-danger" onclick="window.location='{{ route('supplier.index') }}'">Cancel</button>
                                 
                             </form>
                             {{-- form end --}}
