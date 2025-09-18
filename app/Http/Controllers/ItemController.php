@@ -62,7 +62,7 @@ class ItemController extends Controller
             'description' => $request->description,
         ]);
 
-        session()->flash('status', 'Data '.$request->nameApproval.' berhasil disimpan!');
+        session()->flash('status', 'Data '.$request->itemName.' berhasil disimpan!');
 
         return redirect()->route('item.index');     
     }
@@ -81,7 +81,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view('dashboard.backend.item.edit', compact('item'));
     }
 
     /**
@@ -89,7 +89,21 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        if(is_null($item->uom)){
+            $item->update([
+                'itemName' => $request->itemName,
+                'uom' => $request->uom,
+                'description' => $request->description,
+            ]);
+        }
+         $item->update([
+                'itemName' => $request->itemName,
+                'description' => $request->description,
+            ]);
+
+        session()->flash('status', 'Data '.$request->itemName.' berhasil disimpan!');
+
+        return redirect()->route('item.index');    
     }
 
     /**
@@ -97,6 +111,10 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+
+        session()->flash('status', 'Data  '. $item->nameItem .' berhasil dihapus!');
+
+        return redirect()->route('item.index');
     }
 }
