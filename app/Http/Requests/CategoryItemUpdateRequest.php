@@ -22,8 +22,8 @@ class CategoryItemUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-
-
+        // Mendapatkan instance model CategoryItem secara langsung dari route.
+        // Nama parameter route biasanya adalah nama model dalam snake_case (category_item).
         $categoryItem = $this->route('category_item'); // Ambil ID dari route, sesuaikan dengan route Anda
             // Atau bisa juga $userId = $this->id; jika ID ada di form request
 
@@ -33,7 +33,7 @@ class CategoryItemUpdateRequest extends FormRequest
                     // Rule::unique('category_items')->ignore($categoryItem), // Mengecualikan categoryItem yang sedang diedit
                     Rule::unique('category_items', 'nameCategory')->ignore($categoryItem),  //  Mengecualikan categoryItem yang sedang diedit
 
-                    Rule::unique('category_items', 'nameCategory')->ignore($categoryItem)
+                    // Rule::unique('category_items', 'nameCategory')->ignore($categoryItem)
 
                 ],
         ];
