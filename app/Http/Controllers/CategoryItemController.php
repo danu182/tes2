@@ -23,10 +23,10 @@ class CategoryItemController extends Controller
                     return '
                     <div class="d-flex justify-content-end gap-2">
                         <a class="btn btn-warning" 
-                            href="' . route('category-item.edit', $item->id) . '">
+                            href="' . route('category_item.edit', $item->id) . '">
                             Edit
                         </a>
-                        <form class="d-flex gap-2 inline-block" action="' . route('category-item.destroy', $item->id) . '" method="POST">
+                        <form class="d-flex gap-2 inline-block" action="' . route('category_item.destroy', $item->id) . '" method="POST">
                         <button class="btn btn-danger" id="delete-button">
                             Hapus
                         </button>
@@ -64,7 +64,7 @@ class CategoryItemController extends Controller
                 ]);
 
         session()->flash('status', 'Data '.$request->nameCategory.' berhasil disimpan!');
-        return redirect()->route('category-item.index');
+        return redirect()->route('category_item.index');
     }
 
     /**
@@ -88,7 +88,14 @@ class CategoryItemController extends Controller
      */
     public function update(CategoryItemUpdateRequest $request, CategoryItem $categoryItem)
     {
-        return $request->all();
+        $categoryItem->update([
+                'nameCategory' => $request->nameCategory,
+                'description' => $request->description,
+            ]);
+
+        session()->flash('status', 'Data '.$request->nameCategory.' berhasil disimpan!');
+
+        return redirect()->route('category_item.index');    
     }
 
     /**
@@ -96,6 +103,10 @@ class CategoryItemController extends Controller
      */
     public function destroy(CategoryItem $categoryItem)
     {
-        //
+        $categoryItem->delete();
+
+        session()->flash('status', 'Data  '. $categoryItem->nameItem .' berhasil dihapus!');
+
+        return redirect()->route('category_item.index');
     }
 }

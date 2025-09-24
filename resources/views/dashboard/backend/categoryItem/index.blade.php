@@ -62,7 +62,7 @@
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             
-                                           <a href="{{ route('category-item.create') }}" class="btn btn-secondary mb-2"><span class="btn-label"><i class="fa fa-plus"></i></span>Tambah</a>
+                                           <a href="{{ route('category_item.create') }}" class="btn btn-secondary mb-2"><span class="btn-label"><i class="fa fa-plus"></i></span>Tambah</a>
 
                                             <table class="display table table-striped table-hover" id="crudTable">
                                             <thead>

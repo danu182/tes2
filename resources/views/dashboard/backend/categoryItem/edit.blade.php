@@ -16,7 +16,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('category-item.index')}}">Base</a>
+                    <a href="{{route('category_item .index')}}">Base</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -35,7 +35,7 @@
                     </div>
                         <div class="card-body">
                             {{-- form start --}}
-                            <form action="{{ route('category-item.update', $categoryItem->id) }}" method="POST">
+                            <form action="{{ route('category_item.update', $categoryItem->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                  <div class="mb-3">
@@ -74,7 +74,7 @@
                                 </div>
 
                                     <button class="btn btn-success">Submit</button>
-                                    <button type="button" class="btn btn-danger" onclick="window.location='{{ route('category-item.index') }}'">Cancel</button>
+                                    <button type="button" class="btn btn-danger" onclick="window.location='{{ route('category_item.index') }}'">Cancel</button>
                                 
                             </form>
                             {{-- form end --}}

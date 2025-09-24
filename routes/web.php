@@ -19,7 +19,7 @@ Route::resource('sister-company', SisterCompanyController::class);
 Route::resource('status-approval', StatusApprovalController::class);
 Route::resource('supplier', SupplierController::class);
 Route::resource('item', ItemController::class);
-Route::resource('category-item', CategoryItemController::class);
+Route::resource('category_item', CategoryItemController::class);
 
 
 // transaksi
