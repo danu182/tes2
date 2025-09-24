@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class CategoryItemUpdateRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+
+
+        $id = $this->route('category-item.edit')->id; // Ambil ID dari route, sesuaikan dengan route Anda
+            // Atau bisa juga $userId = $this->id; jika ID ada di form request
+
+        return [
+            'nameCategory' => [
+                    'required',
+                    Rule::unique('category_items')->ignore($id, 'id'), // Mengecualikan user yang sedang diedit
+                ],
+        ];
+    }
+}

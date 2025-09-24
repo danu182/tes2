@@ -133,6 +133,7 @@ class SisterCompanyController extends Controller
      */
     public function destroy(SisterCompany $sisterCompany)
     {
+        
         $sisterCompany->delete();
 
         session()->flash('status', 'Data '.$sisterCompany->code .' + '.$sisterCompany->name .' berhasil diupdate!');

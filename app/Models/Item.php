@@ -10,6 +10,18 @@ class Item extends Model
         'itemName',
         'uom',
         'description',
+        'category_id'
 
     ];
+
+
+    
+    public function categoryItem()
+    {
+        return $this->belongsTo(CategoryItem::class, 'id', 'category_id');
+    }
+
+
+    
+
 }

@@ -18,6 +18,7 @@ class StatusApprovalTabelSeeder extends Seeder
             ['nameApproval'=>'approved_by_manager','description'=>'disetujui oleh atas'],
             ['nameApproval'=>'rejected','description'=>'ditolak'],
             ['nameApproval'=>'completed','description'=>'selesai'],
+            ['nameApproval'=>'cancel','description'=>'batal'],
         ];
 
 
