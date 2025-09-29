@@ -5,7 +5,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Item</h3>
+            <h3 class="fw-bold mb-3">tipe-item</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="#">
@@ -16,13 +16,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('item.index')}}">Base</a>
+                    <a href="#">Base</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Add Item</a>
+                    <a href="#">Add tipe-item</a>
                 </li>
             </ul>
         </div>
@@ -31,69 +31,46 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">ADD Item</h4>
+                        <h4 class="card-title">ADD tipe-item</h4>
                     </div>
                         <div class="card-body">
                             {{-- form start --}}
-                            <form action="{{ route('item.store') }}" method="POST">
+                            <form action="{{ route('tipe-item.store') }}" method="POST">
                                 @csrf
 
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputitemName6" class="col-form-label">name Item</label>
+                                        <label for="kodeTipe" class="col-form-label">kode tipe</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="inputitemName6" class="form-control @error('itemName') is-invalid @enderror" aria-describedby="emailHelpInline" name="itemName" value="{{ old('itemName') }}">
+                                        <input type="text" id="kodeTipe" class="form-control @error('kodeTipe') is-invalid @enderror" aria-describedby="emailHelpInline" name="kodeTipe" value="{{ old('kodeTipe') }}">
                                     </div>
                                     <div class="col-auto">
                                         <span id="emailHelpInline" class="form-text">
-                                        masukkan name item.
+                                        masukkan kode tipe.
                                         </span>
                                     </div>
-                                    @error('itemName')
+                                    @error('kodeTipe')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
 
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputuom6" class="col-form-label">uom</label>
+                                        <label for="nameTipe" class="col-form-label">name tipe</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="inputuom6" class="form-control @error('uom') is-invalid @enderror" aria-describedby="emailHelpInline" name="uom" value="{{ old('uom') }}">
-                                    </div>
-                                    <div class="col-auto">
-                                        <span id="emailHelpInline" class="form-text">
-                                        masukkan uom.
-                                        </span>
-                                    </div>
-                                    @error('uom')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                </div>
-
-
-                                {{-- category start --}}
-                                <div class="mb-3">
-                                    <div class="col-auto">
-                                        <label for="category" class="col-form-label">category</label>
-                                    </div>
-                                    <div class="col-auto">
-                                       <select class="form-select form-control" id="category" name="category_id">
-                                            
-                                        </select>
+                                        <input type="text" id="nameTipe" class="form-control @error('nameTipe') is-invalid @enderror" aria-describedby="emailHelpInline" name="nameTipe" value="{{ old('nameTipe') }}">
                                     </div>
                                     <div class="col-auto">
                                         <span id="emailHelpInline" class="form-text">
-                                        masukkan category.
+                                        masukkan name Tipe.
                                         </span>
                                     </div>
-                                    @error('category')
+                                    @error('nameTipe')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
-                                {{-- category end --}}
-
 
                                  <div class="mb-3">
                                     <div class="col-auto">
@@ -104,7 +81,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <span id="descriptionHelpInline" class="form-text">
-                                        masukkan description.
+                                        masukkan description approval.
                                         </span>
                                     </div>
                                     @error('description')
@@ -113,7 +90,7 @@
                                 </div>
 
                                     <button class="btn btn-success">Submit</button>
-                                    <button type="button" class="btn btn-danger" onclick="window.location='{{ route('item.index') }}'">Cancel</button>
+                                    <button type="button" class="btn btn-danger" onclick="window.location='{{ route('tipe-item.index') }}'">Cancel</button>
                                 
                             </form>
                             {{-- form end --}}
@@ -124,40 +101,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-@push('js-bawah')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    
-    <script type="text/javascript">
-        var path = "{{ route('autocompleteCategory') }}";
-    
-        $('#category').select2({
-            placeholder: 'Select an category',
-            ajax: {
-            url: path,
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                results:  $.map(data, function (item) {
-                        return {
-                            text: item.nameCategory,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-            }
-        });
-    
-    </script>
-
-@endpush
 
 
 @endsection

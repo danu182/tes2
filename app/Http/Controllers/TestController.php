@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Models\CategoryItem;
 use App\Models\SisterCompany;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
@@ -54,6 +55,26 @@ class TestController extends Controller
             // The 'select' method ensures we only return the id and name
             $data = Supplier::select("id", "nameSupplier")
                     ->where('nameSupplier', 'LIKE', "%{$supplier}%")
+                    ->get();
+        }
+
+        // Return the data as a JSON response
+        return response()->json($data);
+    }
+
+
+    public function autocompleteCategory(Request $request)
+    {
+        $data = [];
+
+        // Check if a search query 'q' exists
+        if ($request->has('q')) {
+            $category = $request->q;
+            
+            // Query the database for sister companies whose name matches the search term
+            // The 'select' method ensures we only return the id and name
+            $data = CategoryItem::select("id", "nameCategory", 'description')
+                    ->where('nameCategory', 'LIKE', "%{$category}%")
                     ->get();
         }
 

@@ -3,7 +3,6 @@
 @section('conetnt')
     
 @push('js-bawah')
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
     <script>
             // AJAX DataTable
             var datatable = $('#crudTable').DataTable({
@@ -14,10 +13,8 @@
                 },
                 columns: [
                     { data: 'id', name: 'id', width: '5%'},
-                    { data: 'itemName', name: 'itemName'} ,
-                    { data: 'uom', name: 'uom'} ,
-                    { data: 'category_item.nameCategory', name: 'nameCategory'} ,
-                    { data: 'description', name: 'description'} ,
+                    { data:'nameTipe', name: 'nameTipe'},
+                    { data:'description', name: 'description'},
                     {
                         data: 'action',
                         name: 'action',
@@ -34,7 +31,7 @@
 <div class="container">
 				<div class="page-inner">
 					<div class="page-header">
-						<h3 class="fw-bold mb-3">Item</h3>
+						<h3 class="fw-bold mb-3">nameTipe</h3>
 						<ul class="breadcrumbs mb-3">
 							<li class="nav-home">
 								<a href="#">
@@ -51,7 +48,7 @@
 								<i class="icon-arrow-right"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Item</a>
+								<a href="#">nameTipe</a>
 							</li>
 						</ul>
 					</div>
@@ -60,20 +57,18 @@
                         <div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title">Item list</h4>
+									<h4 class="card-title">nameTipe</h4>
 								</div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             
-                                           <a href="{{ route('item.create') }}" class="btn btn-secondary mb-2"><span class="btn-label"><i class="fa fa-plus"></i></span>Tambah</a>
+                                           <a href="{{ route('tipe-item.create') }}" class="btn btn-secondary mb-2"><span class="btn-label"><i class="fa fa-plus"></i></span>Tambah</a>
 
                                             <table class="display table table-striped table-hover" id="crudTable">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>itemName</th>
-                                                    <th>uom</th>
-                                                    <th>nameCategory</th>
+                                                    <th>name Tipe</th>
                                                     <th>description</th>
                                                     
                                                     <th>Action</th> 

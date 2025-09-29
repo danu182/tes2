@@ -18,7 +18,7 @@ class PurchaseRequisitionsController extends Controller
     {
 
         if (request()->ajax()) {
-            $query = PurchaseRequisitions::with(['sisterCompany', 'statusAproval']);
+            $query = PurchaseRequisitions::with(['sisterCompany', 'statusAproval', 'supplier']);
             
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -106,6 +106,9 @@ class PurchaseRequisitionsController extends Controller
      */
     public function update(Request $request, PurchaseRequisitions $purchaseRequisitions, $id)
     {
+
+        // return $request->all();
+
         $data= [
             // 'pr_no' =>  $tes= Helpers::NoOtomatis(),
             'title' =>$request->title, 

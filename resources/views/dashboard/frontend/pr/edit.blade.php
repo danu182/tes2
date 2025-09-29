@@ -66,8 +66,12 @@
                                         <label for="sister_company_id" class="col-form-label">Sister Company</label>
                                     </div>
                                     <div class="col-auto">
-                                       <select class="form-select form-control" id="search" name="sister_company_id">
-                                            {{-- <option value="{{ $purchaseRequisition->title }}">{{ $purchaseRequisition->sister_company['name'] }}</option> --}}
+                                       <select class="form-select form-control" id="search" name="sister_company_id">   
+
+                                            {{-- <option value="{{$purchaseRequisition->sister_company_id }}" {{ ( $purchaseRequisition->sister_company_id) ? 'selected' : '' }}>{{$purchaseRequisition->name?->sister_company_id}}</option> --}}
+
+                                            <option value="{{$purchaseRequisition->sister_company_id }}" {{ ( $purchaseRequisition->sister_company_id) ? 'selected' : '' }}>{{$purchaseRequisition->sisterCompany?->name}}</option>
+
                                         </select>
                                     </div>
                                     <div class="col-auto">

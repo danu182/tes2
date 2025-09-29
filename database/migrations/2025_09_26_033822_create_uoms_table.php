@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('items', function (Blueprint $table) {
-            $table->string('category_id');
+        Schema::create('uoms', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('kodeUom')->unique();
+            $table->string('nameUom')->unique();
+            $table->text('description')->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -21,8 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('items', function (Blueprint $table) {
-            $table->dropColumn('category_id');
-        });
+        Schema::dropIfExists('uoms');
     }
 };

@@ -17,6 +17,7 @@
                     { data: 'pr_no' , name: 'pr_no'},
                     { data: 'sister_company.name' , name: 'name'},
                     { data: 'title' , name: 'title'}, 
+                    { data: 'supplier.nameSupplier' , name: 'nameSupplier'}, 
                     { data: 'description' , name: 'description'}, 
                     { data: 'requested_by_user_id' , name: 'requested_by_user_id'},
                     { data: 'status_aproval.nameApproval' , name: 'nameApproval'},  
@@ -79,6 +80,7 @@
                                                     <th>pr_no</th>
                                                     <th>sisterCompany</th>
                                                     <th>title</th> 
+                                                    <th>nameSupplier</th> 
                                                     <th>description</th> 
                                                     <th>requested_by_user_id</th>
                                                     <th>statusAproval</th>  

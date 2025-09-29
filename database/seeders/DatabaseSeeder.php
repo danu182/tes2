@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
             sisterCompanyTableSeeder::class,
             StatusApprovalTabelSeeder::class,
             SupplierTableSeeder::class,
-            ItemtTableSeeder::class,
+            CategoryItemsSeeder::class,
+            TipeItemsSeeder::class,
+            UomTableSeeder::class,
         ]);
     }
 }
