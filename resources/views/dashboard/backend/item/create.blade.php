@@ -40,34 +40,102 @@
 
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputitemName6" class="col-form-label">name Item</label>
+                                        <label for="kodeItem" class="col-form-label">kodeItem</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="inputitemName6" class="form-control @error('itemName') is-invalid @enderror" aria-describedby="emailHelpInline" name="itemName" value="{{ old('itemName') }}">
+                                        <input type="text" id="kodeItem" class="form-control @error('kodeItem') is-invalid @enderror" aria-describedby="emailHelpInline" name="kodeItem" value="{{ old('kodeItem') }}">
                                     </div>
                                     <div class="col-auto">
                                         <span id="emailHelpInline" class="form-text">
-                                        masukkan name item.
+                                        masukkan kode item.
                                         </span>
                                     </div>
-                                    @error('itemName')
+                                    @error('kodeItem')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
 
                                  <div class="mb-3">
                                     <div class="col-auto">
-                                        <label for="inputuom6" class="col-form-label">uom</label>
+                                        <label for="nameItem" class="col-form-label">nameItem</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="inputuom6" class="form-control @error('uom') is-invalid @enderror" aria-describedby="emailHelpInline" name="uom" value="{{ old('uom') }}">
+                                        <input type="text" id="nameItem" class="form-control @error('nameItem') is-invalid @enderror" aria-describedby="emailHelpInline" name="nameItem" value="{{ old('nameItem') }}">
                                     </div>
                                     <div class="col-auto">
                                         <span id="emailHelpInline" class="form-text">
-                                        masukkan uom.
+                                        masukkan name item.
                                         </span>
                                     </div>
-                                    @error('uom')
+                                    @error('nameItem')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                </div>
+
+                                 <div class="mb-3">
+                                    <div class="col-auto">
+                                        <label for="foto" class="col-form-label">foto</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" id="foto" class="form-control @error('foto') is-invalid @enderror" aria-describedby="emailHelpInline" name="foto" value="{{ old('foto') }}">
+                                    </div>
+                                    <div class="col-auto">
+                                        <span id="emailHelpInline" class="form-text">
+                                        masukkan foto.
+                                        </span>
+                                    </div>
+                                    @error('foto')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                </div>
+
+                                 <div class="mb-3">
+                                    <div class="col-auto">
+                                        <label for="merek" class="col-form-label">merek</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" id="merek" class="form-control @error('merek') is-invalid @enderror" aria-describedby="emailHelpInline" name="merek" value="{{ old('merek') }}">
+                                    </div>
+                                    <div class="col-auto">
+                                        <span id="emailHelpInline" class="form-text">
+                                        masukkan merek.
+                                        </span>
+                                    </div>
+                                    @error('merek')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                </div>
+
+                                 <div class="mb-3">
+                                    <div class="col-auto">
+                                        <label for="seri" class="col-form-label">seri</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" id="seri" class="form-control @error('seri') is-invalid @enderror" aria-describedby="emailHelpInline" name="seri" value="{{ old('seri') }}">
+                                    </div>
+                                    <div class="col-auto">
+                                        <span id="emailHelpInline" class="form-text">
+                                        masukkan seri.
+                                        </span>
+                                    </div>
+                                    @error('seri')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                </div>
+
+                                 <div class="mb-3">
+                                    <div class="col-auto">
+                                        <label for="barcode" class="col-form-label">barcode</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="text" id="barcode" class="form-control @error('barcode') is-invalid @enderror" aria-describedby="emailHelpInline" name="barcode" value="{{ old('barcode') }}">
+                                    </div>
+                                    <div class="col-auto">
+                                        <span id="emailHelpInline" class="form-text">
+                                        masukkan barcode.
+                                        </span>
+                                    </div>
+                                    @error('barcode')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
@@ -79,7 +147,7 @@
                                         <label for="category" class="col-form-label">category</label>
                                     </div>
                                     <div class="col-auto">
-                                       <select class="form-select form-control" id="category" name="category_id">
+                                       <select class="form-select form-control" id="category" name="categoryItem_id">
                                             
                                         </select>
                                     </div>
@@ -88,11 +156,53 @@
                                         masukkan category.
                                         </span>
                                     </div>
-                                    @error('category')
+                                    @error('categoryItem_id')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                 </div>
                                 {{-- category end --}}
+
+                                {{-- tipeItem_id start --}}
+                                <div class="mb-3">
+                                    <div class="col-auto">
+                                        <label for="tipeItem_id" class="col-form-label">tipeItem_id</label>
+                                    </div>
+                                    <div class="col-auto">
+                                       <select class="form-select form-control" id="tipeItem_id" name="tipeItem_id">
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span id="emailHelpInline" class="form-text">
+                                        masukkan tipeItem_id.
+                                        </span>
+                                    </div>
+                                    @error('tipeItem_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                </div>
+                                {{-- tipeItem_id end --}}
+
+                                {{-- uom_id start --}}
+                                <div class="mb-3">
+                                    <div class="col-auto">
+                                        <label for="uom_id" class="col-form-label">uom_id</label>
+                                    </div>
+                                    <div class="col-auto">
+                                       <select class="form-select form-control" id="uom_id" name="uom_id">
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span id="emailHelpInline" class="form-text">
+                                        masukkan uom_id.
+                                        </span>
+                                    </div>
+                                    @error('uom_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                </div>
+                                {{-- uom_id end --}}
 
 
                                  <div class="mb-3">
@@ -146,6 +256,56 @@
                 results:  $.map(data, function (item) {
                         return {
                             text: item.nameCategory,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+            }
+        });
+    
+    </script>
+    
+    <script type="text/javascript">
+        var path = "{{ route('autocompleteTipeItem') }}";
+    
+        $('#tipeItem_id').select2({
+            placeholder: 'Select an tipe Item',
+            ajax: {
+            url: path,
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                results:  $.map(data, function (item) {
+                        return {
+                            text: item.nameTipe,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+            }
+        });
+    
+    </script>
+    
+    <script type="text/javascript">
+        var path = "{{ route('autocompleteUom') }}";
+    
+        $('#uom_id').select2({
+            placeholder: 'Select an uom',
+            ajax: {
+            url: path,
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                results:  $.map(data, function (item) {
+                        return {
+                            text: item.nameUom,
                             id: item.id
                         }
                     })

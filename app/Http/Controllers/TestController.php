@@ -6,6 +6,8 @@ use App\Helpers\Helpers;
 use App\Models\CategoryItem;
 use App\Models\SisterCompany;
 use App\Models\Supplier;
+use App\Models\TipeItem;
+use App\Models\Uom;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -75,6 +77,44 @@ class TestController extends Controller
             // The 'select' method ensures we only return the id and name
             $data = CategoryItem::select("id", "nameCategory", 'description')
                     ->where('nameCategory', 'LIKE', "%{$category}%")
+                    ->get();
+        }
+
+        // Return the data as a JSON response
+        return response()->json($data);
+    }
+
+    public function autocompleteTipeItem(Request $request)
+    {
+        $data = [];
+
+        // Check if a search query 'q' exists
+        if ($request->has('q')) {
+            $tipeItem = $request->q;
+            
+            // Query the database for sister companies whose name matches the search term
+            // The 'select' method ensures we only return the id and name
+            $data = TipeItem::select("id", "nameTipe", 'kodeTipe')
+                    ->where('nameTipe', 'LIKE', "%{$tipeItem}%")
+                    ->get();
+        }
+
+        // Return the data as a JSON response
+        return response()->json($data);
+    }
+    
+    public function autocompleteUom(Request $request)
+    {
+        $data = [];
+
+        // Check if a search query 'q' exists
+        if ($request->has('q')) {
+            $uom = $request->q;
+            
+            // Query the database for sister companies whose name matches the search term
+            // The 'select' method ensures we only return the id and name
+            $data = Uom::select("id", "nameUom", 'kodeUom')
+                    ->where('nameUom', 'LIKE', "%{$uom}%")
                     ->get();
         }
 

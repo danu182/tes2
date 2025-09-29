@@ -3,7 +3,6 @@
 @section('conetnt')
     
 @push('js-bawah')
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
     <script>
             // AJAX DataTable
             var datatable = $('#crudTable').DataTable({
@@ -14,10 +13,36 @@
                 },
                 columns: [
                     { data: 'id', name: 'id', width: '5%'},
-                    { data: 'itemName', name: 'itemName'} ,
-                    { data: 'uom', name: 'uom'} ,
-                    { data: 'category_item.nameCategory', name: 'nameCategory'} ,
-                    { data: 'description', name: 'description'} ,
+                    
+                    { data: 'kodeItem' , name: 'kodeItem'} ,
+                    { data: 'nameItem' , name: 'nameItem'} ,
+                    { data: 'category_item.nameCategory' , name: 'category_item.nameCategory'} ,
+                    { data: 'tipe_item.nameTipe' , name: 'tipe_item.nameTipe'} ,
+                    { data: 'uom.nameUom' , name: 'uom.nameUom'} ,
+                    { data: 'barcode' , name: 'barcode'} ,
+                    // { data: 'foto' , name: 'foto'} ,
+                    { 
+                        data: 'foto', 
+                        name: 'foto',
+                        orderable: false,
+                        searchable: false,
+                        className: 'text-center',
+                        // Tambahkan fungsi render di sini!
+                        render: function(data, type, row) {
+                            // Cek apakah data (URL foto) ada
+                            if (data) {
+                                // Membuat tag <img>
+                                // Menggunakan data sebagai src. Atur tinggi/lebar sesuai kebutuhan Anda.
+                                return '<img src="'+ data +'" height="50px" style="max-width: 100px;"/>';
+                            }
+                            return 'Tidak ada foto'; // Teks jika tidak ada foto
+                        }
+                    } ,
+                    { data: 'merek' , name: 'merek'} ,
+                    { data: 'seri' , name: 'seri'} ,
+                    { data: 'description' , name: 'description'} ,
+
+
                     {
                         data: 'action',
                         name: 'action',
@@ -71,9 +96,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>itemName</th>
-                                                    <th>uom</th>
-                                                    <th>nameCategory</th>
+                                                    <th>kodeItem</th>
+                                                    <th>nameItem</th>
+                                                    <th>categoryItem_id</th>
+                                                    <th>tipeItem_id</th>
+                                                    <th>uom_id</th>
+                                                    <th>barcode</th>
+                                                    <th>foto</th>
+                                                    <th>merek</th>
+                                                    <th>seri</th>
                                                     <th>description</th>
                                                     
                                                     <th>Action</th> 
