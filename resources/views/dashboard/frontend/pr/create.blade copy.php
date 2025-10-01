@@ -65,18 +65,24 @@
                                             </div>
 
                                             {{-- category start --}}
-                                           
-                                                <div class="form-group row">
-                                                    <label for="category" class="col-sm-3 col-form-label">Peminta sister Compnay</label>
-                                                <div class="col-sm-9">
+                                            <div class="mb-3">
+                                                <div class="col-auto">
+                                                    <label for="category" class="col-form-label">Peminta sister Compnay</label>
+                                                </div>
+                                                <div class="col-auto">
                                                 <select class="form-select form-control" id="sisterCompany_id" name="sisterCompany_id">
                                                         
                                                     </select>
                                                 </div>
+                                                {{-- <div class="col-auto">
+                                                    <span id="emailHelpInline" class="form-text">
+                                                    masukkan sister company.
+                                                    </span>
+                                                </div> --}}
                                                 @error('categoryItem_id')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
-                                                </div>
+                                            </div>
                                             {{-- category end --}}
 
                                             <div class="form-group row">
@@ -146,10 +152,10 @@
                                         <tbody id="item-list">
                                             <tr id="row-1">
                                                 
-                                                {{-- item start --}}
-                                                {{-- <td><input type="text" class="form-control" name="item[]" placeholder="Nama Item"></td> --}}
+                                                <!-- {{-- item start --}} -->
+                                                <!-- {{-- <td><input type="text" class="form-control" name="item[]" placeholder="Nama Item"></td> --}} -->
                                                 <td><select class="form-select form-control item-select2" id="item_id" name="item_id[]"></select></td>
-                                                {{-- item end --}}
+                                                <!-- {{-- item end --}} -->
 
 
                                                 <td><input type="number" class="form-control" name="qty[]" value="1" min="1"></td>
@@ -205,7 +211,7 @@
     
     </script>
 
-    {{-- <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var path = "{{ route('autocompleteItem') }}";
     
         $('#item_id').select2({
@@ -228,79 +234,130 @@
             }
         });
     
-    </script> --}}
+    </script> -->
 
+@push('js-bawah')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script>
-    let rowCount = 1; // Mulai dari 1 karena sudah ada 1 baris di HTML
-
-function tambahBaris() {
-    rowCount++;
-    const tableBody = document.getElementById('item-list');
-    const newRow = `
-        <tr id="row-${rowCount}">
-            <td><select class="form-select form-control item-select2" id="item_id" name="item_id[]"></select></td>
-            <td><input type="number" class="form-control" name="qty[]" value="1" min="1"></td>
-            <td><input type="number" class="form-control" name="baseprice[]" placeholder="0.00" min="0" step="0.01"></td>
-            <td><input type="text" class="form-control" name="total[]" value="0.00" readonly></td>
-            <td><input type="text" class="form-control" name="description[]" placeholder="Keterangan"></td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="hapusBaris(this)">Hapus</button></td>
-        </tr>
-    `;
-    tableBody.insertAdjacentHTML('beforeend', newRow);
-
-    const newSelectElement = tableBody.lastElementChild.querySelector('.item-select2');
-    
-    initializeSelect2(newSelectElement); // Panggil fungsi inisialisasi
-}
-
-
-// **Fungsi Reusable untuk Inisialisasi Select2 Item**
-function initializeSelect2(element) {
-    var path = "{{ route('autocompleteItem') }}";
-
-    $(element).select2({
-        placeholder: 'Select an item',
-        ajax: {
-            url: path,
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
+    <script type="text/javascript">
+        // This is a single setup function to run once the document is ready.
+        $(document).ready(function() {
+            // Initialize Select2 for the initial sister company dropdown.
+            $('#sisterCompany_id').select2({
+                placeholder: 'Select an sister company',
+                ajax: {
+                    url: "{{ route('autocompleteSisterCompany') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
                         return {
-                            text: item.nameItem,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: item.name,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+            // Initialize Select2 and event listeners for all existing item rows.
+            // Using a class selector '.item-select2' to target all of them.
+            $('.item-select2').each(function() {
+                initializeItemSelect2($(this));
+                addCalculationListeners($(this).closest('tr'));
+            });
+        });
+
+        let rowCount = 1;
+
+        // A reusable function to initialize Select2 for a given item element.
+        function initializeItemSelect2(element) {
+            var path = "{{ route('autocompleteItem') }}";
+
+            element.select2({
+                placeholder: 'Select an item',
+                width: '100%',
+                ajax: {
+                    url: path,
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: item.nameItem,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
         }
-    });
-}
 
-function hapusBaris(buttonElement) {
-    // 1. Dapatkan elemen <tr> terdekat dari tombol yang diklik
-    const rowToRemove = buttonElement.closest('tr');
+        // A reusable function to add event listeners for calculation to a given row.
+        function addCalculationListeners(row) {
+            const qtyInput = row.find('input[name="qty[]"]');
+            const priceInput = row.find('input[name="baseprice[]"]');
+            const totalInput = row.find('input[name="total[]"]');
+
+            // Listen for changes on both quantity and base price inputs.
+            qtyInput.on('input', function() {
+                calculateTotal(qtyInput, priceInput, totalInput);
+            });
+            
+            priceInput.on('input', function() {
+                calculateTotal(qtyInput, priceInput, totalInput);
+            });
+        }
+
+        // The core calculation logic.
+        function calculateTotal(qtyInput, priceInput, totalInput) {
+            const qty = parseFloat(qtyInput.val()) || 0;
+            const price = parseFloat(priceInput.val()) || 0;
+            const total = qty * price;
+            totalInput.val(total.toFixed(2));
+        }
+
+        // This function adds a new row to the table.
+        function tambahBaris() {
+            rowCount++;
+            const tableBody = $('#item-list');
+            const newRowHtml = `
+                <tr id="row-${rowCount}">
+                    <td><select class="form-select form-control item-select2" name="item_id[]"></select></td>
+                    <td><input type="number" class="form-control" name="qty[]" value="1" min="1"></td>
+                    <td><input type="number" class="form-control" name="baseprice[]" placeholder="0.00" min="0" step="0.01"></td>
+                    <td><input type="text" class="form-control" name="total[]" value="0.00" readonly></td>
+                    <td><input type="text" class="form-control" name="description[]" placeholder="Keterangan"></td>
+                    <td><button type="button" class="btn btn-danger btn-sm" onclick="hapusBaris(this)">Hapus</button></td>
+                </tr>
+            `;
+            tableBody.append(newRowHtml);
+
+            // Get the newly added row and initialize Select2 and listeners on it.
+            const newRow = tableBody.find(`#row-${rowCount}`);
+            const newSelectElement = newRow.find('.item-select2');
+            
+            initializeItemSelect2(newSelectElement);
+            addCalculationListeners(newRow);
+        }
+
+        // This function removes a row from the table.
+        function hapusBaris(buttonElement) {
+            const rowToRemove = $(buttonElement).closest('tr');
+            if (rowToRemove.siblings().length > 0) {
+                 rowToRemove.remove();
+            }
+        }
+    </script>
+@endpush
+
     
-    // 2. Hapus baris tersebut dari tabel
-    if (rowToRemove) {
-        rowToRemove.remove();
-    }
-
-    // Catatan: Jika Anda ingin mencegah semua baris terhapus (misalnya minimal 1 baris),
-    // Anda bisa menambahkan pengecekan di sini:
-    /*
-    const body = document.getElementById('item-list');
-    if (body.children.length > 1) {
-        rowToRemove.remove();
-    } else {
-        alert("Minimal harus ada satu item!");
-    }
-    */
-}
-</script>
 
 <script type="text/javascript">
         var path = "{{ route('autocompleteItem') }}";

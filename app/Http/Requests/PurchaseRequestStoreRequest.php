@@ -22,12 +22,16 @@ class PurchaseRequestStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pr_no' =>'required|unique:purchase_requisitions,no_pr|max:100', 
-            'title', 
-            'description', 
-            'requested_by_user_id',
-            'status',  
-            'total_amount',
+            'pr_no' => 'required|unique:purchase_requisitions,no_pr|max:100',
+            'sisterCompany_id' => 'required|exists:sister_companies,id', 
+            'title' => 'required',
+            'sifat' => 'required|numeric',
+            'jenis' => 'required|numeric',
+            'description'=>'nullable',
+            // 'requested_by_user_id' => 'required|exists:users,id',
+            'status' => 'required|exists:status_approvals,id',
+            'total_amount' => 'required|numeric',
+            // 'createded_by_user_id' =>'required|exists:users,id',
         ];
     }
 }

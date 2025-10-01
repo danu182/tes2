@@ -99,7 +99,21 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $item->update([
+                    // 'kodeItem' => $request->kodeItem,
+                    'nameItem' => $request->nameItem,
+                    'categoryItem_id' => $request->categoryItem_id,
+                    'tipeItem_id' => $request->tipeItem_id,
+                    'uom_id' => $request->uom_id,
+                    'barcode' => $request->barcode,
+                    'foto' => $request->foto,
+                    'merek' => $request->merek,
+                    'seri' => $request->seri,
+                    'description' => $request->description,
+                ]);
+
+        session()->flash('status', 'Data '.$request->nameCategory.' berhasil di updaye!');
+        return redirect()->route('item.index');
     }
 
     /**
@@ -107,6 +121,10 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+
+        session()->flash('status', 'Data  '. $item->nameItem .' berhasil dihapus!');
+
+        return redirect()->route('item.index');
     }
 }

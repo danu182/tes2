@@ -15,13 +15,20 @@ return new class extends Migration
             $table->id();
 
             $table->string('pr_no')->unique(); 
-            $table->string('title'); 
+            $table->bigInteger('sisterCompany_id'); 
+            $table->string('title')->nullable(); 
+            $table->string('sifat',50); 
+            $table->string('jenis',50); 
 
             $table->text('description')->nullable(); 
             $table->bigInteger('requested_by_user_id');
 
-            $table->bigInteger('status');  
+            $table->bigInteger('status')->default(1);  // draft, pending, approved, rejected
             $table->string('total_amount');
+
+            $table->bigInteger('createded_by_user_id');
+            $table->bigInteger('updated_by_user_id')->nullable();
+
 
             $table->timestamps();
 

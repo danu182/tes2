@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Http\Requests\PurchaseRequestStoreRequest;
 use App\Models\PurchaseRequisitions;
+use App\Models\PurchaseRequisitionsDetail;
 use App\Models\SisterCompany;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Helper\Helper;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -62,18 +65,61 @@ class PurchaseRequisitionsController extends Controller
     {
         // return $request->all();
 
-        $data= [
-            'pr_no' =>  $tes= Helpers::NoOtomatis(),
-            'title' =>$request->title, 
-            'sister_company_id'=>$request->sister_company_id,
-            'supplier_id'=>$request->supplier_id,
-            'description'=>$request->description, 
-            'requested_by_user_id'=>1,
-            'status'=>1,  
-            'total_amount'=>'20000',
-        ];
-        
-        PurchaseRequisitions::create($data);
+        $kodeSistercompany= SisterCompany::select('code')->where('id', $request->sisterCompany_id)->first();
+        return $kodeSistercompany;
+
+         // 1. Validasi Data Header (contoh minimal)
+        $request->validate([
+            'sisterCompany_id' => 'required|integer',
+            'jenis' => 'required|integer',
+            'sifat' => 'required|integer',
+            'item_id' => 'required|array', // Pastikan ada array item
+            'qty' => 'required|array',
+            'baseprice' => 'required|array',
+            'description' => 'required|array',
+        ]);
+
+        // 2. Simpan Data Header PR
+        $pr = PurchaseRequisitions::create([
+            'no_pr' => Helpers::NoOtomatis(), // Asumsi ada fungsi untuk generate nomor PR
+            'tanggal' => now(),
+            'sister_company_id' => $request->sisterCompany_id,
+            'jenis' => $request->jenis,
+            'sifat' => $request->sifat,
+            // ... kolom header lainnya
+        ]);
+
+        // 3. Simpan Data Detail Item PR
+        // Kita mengulang berdasarkan array 'item_id'
+        $itemIds = $request->item_id;
+        $quantities = $request->qty;
+        $basePrices = $request->baseprice;
+        $descriptions = $request->description;
+
+        // Mengulang semua item yang dikirim
+        foreach ($itemIds as $index => $itemId) {
+            // Pastikan item_id tidak kosong, terutama jika ada baris kosong
+            if (!empty($itemId)) {
+                
+                // Hitung total (jika belum dihitung oleh JS)
+                $qty = (float) $quantities[$index];
+                $price = (float) $basePrices[$index];
+                $total = $qty * $price;
+
+                PurchaseRequisitionsDetail::create([
+                    'purchase_request_id' => $pr->id, // Foreign key ke header PR
+                    'item_id' => $itemId,
+                    'qty' => $qty,
+                    'baseprice' => $price,
+                    'total' => $total,
+                    'description' => $descriptions[$index],
+                ]);
+            }
+        }
+
+        // 4. Redirect atau berikan respon sukses
+        // return redirect()->route('pr.index')->with('success', 'Purchase Request berhasil ditambahkan!');
+   
 
         session()->flash('status', 'Data '.$data['pr_no'].' berhasil disimpan!');
 

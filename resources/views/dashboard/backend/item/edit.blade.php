@@ -44,7 +44,7 @@
                                         <label for="kodeItem" class="col-form-label">kodeItem</label>
                                     </div>
                                     <div class="col-auto">
-                                        <input type="text" id="kodeItem" class="form-control @error('kodeItem') is-invalid @enderror" aria-describedby="emailHelpInline" name="kodeItem" value="{{ $item->kodeItem ?: old('kodeItem') }}">
+                                        <input type="text" id="kodeItem" class="form-control @error('kodeItem') is-invalid @enderror" aria-describedby="emailHelpInline" name="kodeItem" value="{{ $item->kodeItem ?: old('kodeItem') }}" disabled>
                                     </div>
                                     <div class="col-auto">
                                         <span id="emailHelpInline" class="form-text">
@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="col-auto">
                                        <select class="form-select form-control" id="category" name="categoryItem_id">
-                                            
+                                            <option value="{{$item->categoryItem_id }}" {{ ( $item->categoryItem_id) ? 'selected' : '' }}>{{$item->categoryItem->nameCategory}}</option>
                                         </select>
                                     </div>
                                     <div class="col-auto">
@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="col-auto">
                                        <select class="form-select form-control" id="tipeItem_id" name="tipeItem_id">
-                                            
+                                            <option value="{{$item->tipeItem_id }}" {{ ( $item->tipeItem_id) ? 'selected' : '' }}>{{$item->tipeItem->nameTipe}}</option>
                                         </select>
                                     </div>
                                     <div class="col-auto">
@@ -191,7 +191,7 @@
                                     </div>
                                     <div class="col-auto">
                                        <select class="form-select form-control" id="uom_id" name="uom_id">
-                                            
+                                            <option value="{{$item->uom_id }}" {{ ( $item->uom_id) ? 'selected' : '' }}>{{$item->uom->nameUom}}</option>
                                         </select>
                                     </div>
                                     <div class="col-auto">
@@ -211,7 +211,7 @@
                                         <label for="inputdescription6" class="col-form-label">description</label>
                                     </div>
                                     <div class="col-auto">
-                                        <textarea name="description" id="" cols="30" rows="10" id="inputdescription6" class="form-control @error('description') is-invalid @enderror" aria-describedby="descriptionHelpInline">{{ old('description') }}</textarea>
+                                        <textarea name="description" id="" cols="30" rows="10" id="inputdescription6" class="form-control @error('description') is-invalid @enderror" aria-describedby="descriptionHelpInline">{{ $item->description ?: old('description') }}</textarea>
                                     </div>
                                     <div class="col-auto">
                                         <span id="descriptionHelpInline" class="form-text">

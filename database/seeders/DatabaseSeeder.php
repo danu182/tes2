@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             CategoryItemsSeeder::class,
             TipeItemsSeeder::class,
             UomTableSeeder::class,
+            ItemTableSeeder::class,
         ]);
     }
 }

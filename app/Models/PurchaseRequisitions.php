@@ -12,14 +12,16 @@ class PurchaseRequisitions extends Model
 
 
     protected $fillable =[
-        'pr_no',
-        'sister_company_id',
-        'supplier_id',
-        'title', 
-        'description', 
-        'requested_by_user_id',
-        'status',  
-        'total_amount',
+            'pr_no', 
+            'sisterCompany_id', 
+            'title',
+            'sifat',
+            'jenis',
+            'description',
+            'requested_by_user_id',
+            'status',
+            'total_amount',
+            'createded_by_user_id',
 
     ];
 

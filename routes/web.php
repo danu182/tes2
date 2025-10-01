@@ -36,6 +36,8 @@ Route::resource('pr', PurchaseRequisitionsController::class);
  Route::get('autocompleteCategory', [TestController::class, 'autocompleteCategory'])->name('autocompleteCategory');
  Route::get('autocompleteTipeItem', [TestController::class, 'autocompleteTipeItem'])->name('autocompleteTipeItem');
  Route::get('autocompleteUom', [TestController::class, 'autocompleteUom'])->name('autocompleteUom');
+ Route::get('autocompleteItem', [TestController::class, 'autocompleteItem'])->name('autocompleteItem');
+ Route::get('autocompleteSisterCompany', [TestController::class, 'autocompleteSisterCompany'])->name('autocompleteSisterCompany');
 
 
 

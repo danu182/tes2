@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Models\CategoryItem;
+use App\Models\Item;
 use App\Models\SisterCompany;
 use App\Models\Supplier;
 use App\Models\TipeItem;
@@ -115,6 +116,44 @@ class TestController extends Controller
             // The 'select' method ensures we only return the id and name
             $data = Uom::select("id", "nameUom", 'kodeUom')
                     ->where('nameUom', 'LIKE', "%{$uom}%")
+                    ->get();
+        }
+
+        // Return the data as a JSON response
+        return response()->json($data);
+    }
+    
+    public function autocompleteSisterCompany(Request $request)
+    {
+        $data = [];
+
+        // Check if a search query 'q' exists
+        if ($request->has('q')) {
+            $sister_companies = $request->q;
+            
+            // Query the database for sister companies whose name matches the search term
+            // The 'select' method ensures we only return the id and name
+            $data = SisterCompany::select("id", "code", 'name')
+                    ->where('name', 'LIKE', "%{$sister_companies}%")
+                    ->get();
+        }
+
+        // Return the data as a JSON response
+        return response()->json($data);
+    }
+    
+    public function autocompleteItem(Request $request)
+    {
+        $data = [];
+
+        // Check if a search query 'q' exists
+        if ($request->has('q')) {
+            $items = $request->q;
+            
+            // Query the database for sister companies whose name matches the search term
+            // The 'select' method ensures we only return the id and name
+            $data = Item::select("id", "nameItem")
+                    ->where('nameItem', 'LIKE', "%{$items}%")
                     ->get();
         }
 
